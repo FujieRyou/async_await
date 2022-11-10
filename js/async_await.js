@@ -1,19 +1,20 @@
-async function resolveSample(){
-    return "resolve"
-}
-resolveSample().then((value)=>{
-    console.log(value);
-})
+// async function resolveSample(){
+//     return "resolve"
+// }
+// resolveSample().then((value)=>{
+//     console.log(value);
+// 結果　"resolve"
+// })
 
 
-async function rejectSample(){
-    throw new Error("reject!!")
-}
-rejectSample().catch((err)=>{
-    console.log(err);
-})
 
-
+// async function rejectSample(){
+//     throw new Error("reject!!")
+// }
+// rejectSample().catch((err)=>{
+// .catchでエラーが起きた時の処理
+//     console.log(err);
+// })
 // function resolveError(){
 //     return "resolveError!!"
 // }
@@ -23,20 +24,24 @@ rejectSample().catch((err)=>{
 // ↑はasync functionではないためPromiseを返さない
 
 
-function sampleResolve(value){
-    return new Promise((resolve)=>{
-        setTimeout(()=>{
-            resolve (value * 2)
-        },3000)
-    })
-}
-async function sample(){
-    const result = await sampleResolve(10)
-    return result + 5;
-}
-sample().then((num)=>{
-    console.log(num);
-})
+// function sampleResolve(value){
+//     return new Promise((resolve)=>{
+//         setTimeout(()=>{
+//             resolve (value * 2)
+//         },3000)
+//     })
+// }
+// async function sample(){
+//     const result = await sampleResolve(10)
+//     return result + 5;
+// }
+// sample().then((num)=>{
+//     console.log(num);
+// })
+
+
+
+
 
 const loadingScreen = document.querySelector(".loadingScreen")
 console.log(loadingScreen);
@@ -44,27 +49,38 @@ console.log(loadingScreen);
 const loadingBorder = document.querySelector(".loadingBorder")
 console.log(loadingBorder);
 
-function loadingAni(){
-    return new Promise((resolve)=>{
-        // loadingBorder.animate({
-        //     width:["0%","100%"]
-        // },{
-        //     duration: 1500,
-        //     fill:"forwards"
-        // })
-        loadingScreen.style.opacity = 0;
-        loadingScreen.style.visibility = "hidden";
-        resolve();
-    })
+const wrap = document.querySelector(".wrap")
+console.log(wrap);
+
+async function loadingDelete(){
+    // return new Promise((resolve)=>{
+    //         loadingScreen.style.opacity = 0;
+    //         loadingScreen.style.visibility = "hidden";
+    //         resolve();
+        setTimeout(()=>{
+            loadingScreen.style.opacity = 0;
+            loadingScreen.style.visibility = "hidden";
+            // resolve();
+        },1500);
+    // })
 }
 
-loadingAni()
+function loadingAni(){
+            loadingBorder.animate({
+            width:["0%","100%"]
+        },{
+            duration: 1500,
+            fill:"forwards"
+        })
+}
+
 
 async function loading(){
-    loadingAni()
+    await loadingDelete();
+    loadingAni();
 }
 
-
+loading()
 
 
 
